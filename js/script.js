@@ -97,6 +97,7 @@ const printQuote = () => {
 
   document.getElementById('quote-box').innerHTML = stringOfQuoteProperties;
 
+  // change background
   changeBackgroundColour();
 }
 
@@ -117,3 +118,5 @@ const randomNumber = (min, max) => {
 // This event listener will respond to "Show another quote" button clicks
 // when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+
+setInterval(printQuote, 20000);
