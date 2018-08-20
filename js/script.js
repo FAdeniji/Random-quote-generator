@@ -66,8 +66,8 @@ const quotes = [
 
 
 // Create the getRandomQuuote function and name it getRandomQuote
-const getRandomQuote = () => {
-  const quotesLength = quotes.length;
+const getRandomQuote = (array) => {
+  const quotesLength = array.length;
   const randomNumber = Math.floor(Math.random() * quotesLength)
   return quotes[randomNumber];
 }
@@ -75,7 +75,7 @@ const getRandomQuote = () => {
 
 // Create the printQuote funtion and name it printQuote
 const printQuote = () => {
-  const quote = getRandomQuote();
+  const quote = getRandomQuote(quotes);
   document.getElementsByClassName('quote')[0].innerHTML = quote.message;
   document.getElementsByClassName('source')[0].innerHTML = quote.author + '<span class="citation"></span><span class="year"></span>';
   document.getElementsByClassName('citation')[0].innerHTML = quote.tag;
