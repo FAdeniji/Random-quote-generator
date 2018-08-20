@@ -77,9 +77,20 @@ const getRandomQuote = (array) => {
 const printQuote = () => {
   const quote = getRandomQuote(quotes);
   document.getElementsByClassName('quote')[0].innerHTML = quote.message;
-  document.getElementsByClassName('source')[0].innerHTML = quote.author + '<span class="citation"></span><span class="year"></span>';
-  document.getElementsByClassName('citation')[0].innerHTML = quote.tag;
-  document.getElementsByClassName('year')[0].innerHTML = quote.year_released;
+  let sourceField = document.getElementsByClassName('source')[0];
+  sourceField.innerHTML = quote.author;
+  if(quote.tag) {
+    let span = document.createElement('span');
+    span.className = 'citation';
+    span.innerHTML = quote.tag;
+    sourceField.appendChild(span);
+  }
+  if(quote.year_released) {
+    let span = document.createElement('span');
+    span.className = 'year';
+    span.innerHTML = quote.year_released;
+    sourceField.appendChild(span);
+  }
 }
 
 
