@@ -68,31 +68,51 @@ const quotes = [
 // Create the getRandomQuuote function and name it getRandomQuote
 const getRandomQuote = (array) => {
   const quotesLength = array.length;
-  const randomNumber = Math.floor(Math.random() * quotesLength)
-  return quotes[randomNumber];
+  const index = randomNumber(0, quotesLength);
+  return quotes[index];
 }
 
 
 // Create the printQuote funtion and name it printQuote
 const printQuote = () => {
   const quote = getRandomQuote(quotes);
-  document.getElementsByClassName('quote')[0].innerHTML = quote.message;
-  let sourceField = document.getElementsByClassName('source')[0];
-  sourceField.innerHTML = quote.author;
+  let stringOfQuoteProperties = '';
+
+  // check presence of all properties before adding
+  if(quote.message) {
+    stringOfQuoteProperties += `<p class="quote">${quote.message}</p>`;
+  }
+  if(quote.author) {
+    stringOfQuoteProperties += `<p class="source">${quote.author}`;
+  }
   if(quote.tag) {
-    let span = document.createElement('span');
-    span.className = 'citation';
-    span.innerHTML = quote.tag;
-    sourceField.appendChild(span);
+    stringOfQuoteProperties += `<span class="citation">${quote.tag}</span>`;
   }
   if(quote.year_released) {
-    let span = document.createElement('span');
-    span.className = 'year';
-    span.innerHTML = quote.year_released;
-    sourceField.appendChild(span);
+    stringOfQuoteProperties += `<span class="year">${quote.year_released}</span>`;
   }
+  if(quote.author) {
+    stringOfQuoteProperties += `</p>`;
+  }
+
+  document.getElementById('quote-box').innerHTML = stringOfQuoteProperties;
+
+  changeBackgroundColour();
 }
 
+const changeBackgroundColour = () => {
+  let body = document.body;
+
+  const red = randomNumber(0, 255);
+  const blue = randomNumber(0, 255);
+  const green = randomNumber(0, 255);
+
+  body.style.backgroundColor = `rgb(${red},${blue},${green})`;
+}
+
+const randomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min) + min);
+}
 
 // This event listener will respond to "Show another quote" button clicks
 // when user clicks anywhere on the button, the "printQuote" function is called
